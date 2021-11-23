@@ -15,10 +15,18 @@ def btn_clear():
 def btn_equal():
     global expression
 
-    result = str(eval(expression))
-    input_text.set(result)
+    try:
+        result = str(eval(expression))
+        input_text.set(result)
+
+    except:
+        input_text.set("Invalid syntax")
+        result = ""
     expression = result
+
 expression = ""
+
+
 
 window = Tk()
 window.geometry("312x324")
