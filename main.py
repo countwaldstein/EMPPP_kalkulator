@@ -29,7 +29,7 @@ expression = ""
 
 
 window = Tk()
-window.geometry("312x324")
+window.geometry("312x380")
 window.resizable(0, 0)
 window.title("Calc")
 
@@ -57,12 +57,17 @@ button_five = Button(btns_frame, text = "5", fg = "black", width = 10, height = 
 button_six = Button(btns_frame, text = "6", fg = "black", width = 10, height = 3, bd = 0, bg = "#eee", cursor = "hand2", command = lambda: btn_click("6")).grid(row = 2, column = 2,  padx = 1, pady = 1)
 button_minus = Button(btns_frame, text = "-", fg = "black", width = 10, height = 3, bd = 0, bg = "#eee", cursor = "hand2", command = lambda: btn_click("-")).grid(row = 2, column = 3,  padx = 1, pady = 1)
 
-button_equals = Button(btns_frame, text = "=", fg = "black", width = 43, height = 3, bd = 0, bg = "#eee", cursor = "hand2", command = lambda: btn_equal()).grid(row = 3, column = 0, columnspan = 4, padx = 1, pady = 1)
+button_seven = Button(btns_frame, text = "7", fg = "black", width = 10, height = 3, bd = 0, bg = "#eee", cursor = "hand2", command = lambda: btn_click("7")).grid(row = 3, column = 0,  padx = 1, pady = 1)
+button_eight = Button(btns_frame, text = "8", fg = "black", width = 10, height = 3, bd = 0, bg = "#eee", cursor = "hand2", command = lambda: btn_click("8")).grid(row = 3, column = 1, padx = 1, pady = 1)
+button_nine = Button(btns_frame, text = "9", fg = "black", width = 10, height = 3, bd = 0, bg = "#eee", cursor = "hand2", command = lambda: btn_click("9")).grid(row = 3, column = 2,  padx = 1, pady = 1)
+button_multiply = Button(btns_frame, text = "*", fg = "black", width = 10, height = 3, bd = 0, bg = "#eee", cursor = "hand2", command = lambda: btn_click("*")).grid(row = 3, column = 3,  padx = 1, pady = 1)
 
-# button_fx = Button(btns_frame, text = "f(x)=", fg = "black", width = 10, height = 3, bd = 0, bg = "#eee", cursor = "hand2", command = lambda: btn_click("f(x)=")).grid(row = 3, column = 0,  padx = 1, pady = 1)
-# button_x = Button(btns_frame, text = "x", fg = "black", width = 10, height = 3, bd = 0, bg = "#eee", cursor = "hand2", command = lambda: btn_click("x")).grid(row = 3, column = 1,  padx = 1, pady = 1)
-# button_2 = Button(btns_frame, text = "^2", fg = "black", width = 10, height = 3, bd = 0, bg = "#eee", cursor = "hand2", command = lambda: btn_click("²")).grid(row = 3, column = 2,  padx = 1, pady = 1)
-# button_3 = Button(btns_frame, text = "^3", fg = "black", width = 10, height = 3, bd = 0, bg = "#eee", cursor = "hand2", command = lambda: btn_click("³")).grid(row = 3, column = 3,  padx = 1, pady = 1)
+button_zero = Button(btns_frame, text = "0", fg = "black", width = 10, height = 3, bd = 0, bg = "#eee", cursor = "hand2", command = lambda: btn_click("0")).grid(row = 4, column = 0,  padx = 1, pady = 1)
+button_dot = Button(btns_frame, text = ".", fg = "black", width = 10, height = 3, bd = 0, bg = "#eee", cursor = "hand2", command = lambda: btn_click(".")).grid(row = 4, column = 1,  padx = 1, pady = 1)
+button_exp = Button(btns_frame, text = "^", fg = "black", width = 10, height = 3, bd = 0, bg = "#eee", cursor = "hand2", command = lambda: btn_click("**")).grid(row = 4, column = 2,  padx = 1, pady = 1)
+button_modulo = Button(btns_frame, text = "mod", fg = "black", width = 10, height = 3, bd = 0, bg = "#eee", cursor = "hand2", command = lambda: btn_click("%")).grid(row = 4, column = 3,  padx = 1, pady = 1)
+
+button_equals = Button(btns_frame, text = "=", fg = "black", width = 43, height = 3, bd = 0, bg = "#eee", cursor = "hand2", command = lambda: btn_equal()).grid(row = 5, column = 0, columnspan = 4, padx = 1, pady = 1)
 
 
 
