@@ -1,4 +1,41 @@
 from tkinter import *
+import tkinter as tk
+import numpy as np
+import matplotlib
+from matplotlib.backends._backend_tk import NavigationToolbar2Tk
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.figure import Figure
+import  re
+
+def createNewWindow():
+    functionWindow = tk.Toplevel(main_calc)
+    input_func = StringVar()
+    input_frame = Frame(functionWindow, width = 312, height = 50, bd = 0, highlightbackground = "black", highlightcolor = "black", highlightthickness = 1)
+    input_frame.pack(side = TOP)
+    function = ''
+    input_field1 = Entry(input_frame, font = ('arial', 18, 'bold'), textvariable = input_func, width = 50, bg = "#eee", bd = 0, justify = RIGHT)
+
+    input_field1.grid(row = 0, column = 0)
+    input_field1.pack(ipady = 10)
+
+    btns_frame2 = Frame(functionWindow, width=312, height=272.5, bg="grey")
+    btns_frame2.pack()
+
+    fig = matplotlib.figure.Figure(figsize=(5, 4), dpi=100)
+    canvas = FigureCanvasTkAgg(fig, master=functionWindow)  # A tk.DrawingArea.
+    canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+    toolbar = NavigationToolbar2Tk(canvas, functionWindow)
+
+
+
+
+    button_drawfx = Button(btns_frame2, image = imgFx, width = 310, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda:[  btn_drawfx(input_func, canvas, toolbar, fig,  functionWindow, function)]).grid(row = 2, column = 0, columnspan = 4, padx = 1, pady = 1)
+
+
+
+
+
+
 
 def btn_click(item):
 
@@ -24,24 +61,69 @@ def btn_equal():
         result = ""
     expression = result
 
+def btn_drawfx(input_func, canvas, toolbar, fig,  functionWindow, function):
+
+    function = input_func.get()
+    print(function)
+    func = string2func(function)
+    x = np.arange(-10, 10, .01)
+    fig.clear()
+    fig.add_subplot(111).plot(x, func(x))
+    canvas.draw_idle()
+    toolbar.update()
+
+
+replacements = {
+    'sin' : 'np.sin',
+    'cos' : 'np.cos',
+    'exp': 'np.exp',
+    'sqrt': 'np.sqrt',
+    '^': '**',
+}
+
+allowed_words = [
+    'x',
+    'sin',
+    'cos',
+    'sqrt',
+    'exp',
+]
+
+def string2func(string):
+    ''' evaluates the string and returns a function of x '''
+    # find all words and check if all are allowed:
+    for word in re.findall('[a-zA-Z_]+', string):
+        if word not in allowed_words:
+            raise ValueError(
+                '"{}" is forbidden to use in math expression'.format(word)
+            )
+
+    for old, new in replacements.items():
+        string = string.replace(old, new)
+
+    def func(x):
+        return eval(string)
+
+    return func
+
 expression = ""
 
+main_calc = Tk()
+main_calc.geometry("316x435")
+main_calc.resizable(0, 0)
+main_calc.title("Calc")
 
 
-window = Tk()
-window.geometry("316x384")
-window.resizable(0, 0)
-window.title("Calc")
 
 input_text = StringVar()
-input_frame = Frame(window, width = 312, height = 50, bd = 0, highlightbackground = "black", highlightcolor = "black", highlightthickness = 1)
+input_frame = Frame(main_calc, width = 312, height = 50, bd = 0, highlightbackground = "black", highlightcolor = "black", highlightthickness = 1)
 input_frame.pack(side = TOP)
 
 input_field = Entry(input_frame, font = ('arial', 18, 'bold'), textvariable = input_text, width = 50, bg = "#eee", bd = 0, justify = RIGHT)
 input_field.grid(row = 0, column = 0)
 input_field.pack(ipady = 10)
 
-btns_frame = Frame(window, width = 312, height = 272.5, bg = "grey")
+btns_frame = Frame(main_calc, width = 312, height = 272.5, bg = "grey")
 btns_frame.pack()
 
 img0 = PhotoImage(file="images/Button0.png")
@@ -63,6 +145,7 @@ imgExpo = PhotoImage(file="images/ButtonExpo.png")
 imgMod = PhotoImage(file="images/ButtonMod.png")
 imgClear = PhotoImage(file="images/ButtonClear.png")
 imgEqual = PhotoImage(file="images/ButtonEqual.png")
+imgFx = PhotoImage(file="images/ButtonFx.png")
 
 clear = Button(btns_frame, image = imgClear, width = 233, height = 53, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_clear()).grid(row = 0, column = 0, columnspan = 3, padx = 1, pady = 1)
 divide = Button(btns_frame, image = imgDivision, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click("/")).grid(row = 0, column = 3, padx = 1, pady = 1)
@@ -87,8 +170,12 @@ button_dot = Button(btns_frame, image = imgDot, width = 75, height = 51, bd = 0,
 button_exp = Button(btns_frame, image = imgExpo, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click("**")).grid(row = 4, column = 2,  padx = 1, pady = 1)
 button_modulo = Button(btns_frame, image = imgMod, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click("%")).grid(row = 4, column = 3,  padx = 1, pady = 1)
 
-button_equals = Button(btns_frame, image = imgEqual, width = 310, height = 50, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_equal()).grid(row = 5, column = 0, columnspan = 4, padx = 1, pady = 1)
+button_equals = Button(btns_frame, image = imgEqual, width = 310, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_equal()).grid(row = 5, column = 0, columnspan = 4, padx = 1, pady = 1)
+
+buttonExample = tk.Button(btns_frame, image = imgFx, width = 310, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2",
+              text="Create new window",
+              command=createNewWindow).grid(row = 6, column = 0, columnspan = 4, padx = 1, pady = 1)
 
 
 
-window.mainloop()
+main_calc.mainloop()
