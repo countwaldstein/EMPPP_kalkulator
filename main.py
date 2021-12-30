@@ -6,9 +6,9 @@ import matplotlib
 from matplotlib.backends._backend_tk import NavigationToolbar2Tk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
+import  re
 import scipy
 from scipy.optimize import fmin
-import  re
 
 def createNewWindow():
     functionWindow = tk.Toplevel(main_calc)
@@ -69,35 +69,32 @@ def createNewWindow():
 
 
 
-def createTryWindow():
+
+    button_drawfx = Button(btns_frame2, image = imgFx, width = 310, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda:[  btn_drawfx(input_func, canvas, toolbar, fig,  functionWindow, function)]).grid(row = 2, column = 0, columnspan = 4, padx = 1, pady = 1)
+
+
+
+
+def createTrigonometryWindow():
     functionWindow = tk.Toplevel(main_calc)
     input_v = StringVar()
 
-    btns_frame_try = Frame(functionWindow, width=312, height=272.5, bg="grey")
-    btns_frame_try.pack()
+    btns_frame_tri = Frame(functionWindow, width=312, height=272.5, bg="grey")
+    btns_frame_tri.pack()
 
-    button_sin = Button(btns_frame_try, image=img1, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+    button_sin = Button(btns_frame_tri, image=img1, width=75, height=51, bd=0, bg="grey", activebackground="grey",
                         cursor="hand2", command=lambda: sin(input_text)).grid(row = 0, column = 0, columnspan = 1, padx = 1, pady = 1)
 
-    button_cos = Button(btns_frame_try, image=img1, width=75, height=51, bd=0, bg="grey", activebackground="grey",
-                        cursor="hand2", command=lambda: btn_click("cos()")).grid(row = 0, column = 1, columnspan = 1, padx = 1, pady = 1)
+    button_cos = Button(btns_frame_tri, image=img1, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+                        cursor="hand2", command=lambda: cos(input_text)).grid(row = 0, column = 1, columnspan = 1, padx = 1, pady = 1)
 
-    button_tg = Button(btns_frame_try, image=img1, width=75, height=51, bd=0, bg="grey", activebackground="grey",
-                        cursor="hand2", command=lambda: btn_click("tg()")).grid(row=1, column=0, columnspan=1, padx=1,
+    button_tg = Button(btns_frame_tri, image=img1, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+                        cursor="hand2", command=lambda: tg(input_text)).grid(row=1, column=0, columnspan=1, padx=1,
                                                                                  pady=1)
 
-    button_ctg = Button(btns_frame_try, image=img1, width=75, height=51, bd=0, bg="grey", activebackground="grey",
-                        cursor="hand2", command=lambda: btn_click("ctg()")).grid(row=1, column=1, columnspan=1, padx=1,
+    button_ctg = Button(btns_frame_tri, image=img1, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+                        cursor="hand2", command=lambda: ctg(input_text)).grid(row=1, column=1, columnspan=1, padx=1,
                                                                                  pady=1)
-
-
-def sin(input_v):
-    global expression
-    v = input_v.get()
-    print(v)
-    r = math.sin(math.radians(float(v)))
-    print(r)
-    input_text.set(str(r))
 
 def find_min(input_func,input_constraint_min,input_constraint_max):
     global function_min
@@ -110,6 +107,35 @@ def find_min(input_func,input_constraint_min,input_constraint_max):
     function_min.set(str(xmin_local))
 
     print(function_min)
+
+def sin(input_v):
+    global expression
+    v = input_v.get()
+    r = math.sin(math.radians(float(v)))
+    input_text.set(str(r))
+    expression = str(r)
+
+def cos(input_v):
+    global expression
+    v = input_v.get()
+    r = math.cos(math.radians(float(v)))
+    input_text.set(str(r))
+    expression = str(r)
+
+def tg(input_v):
+    global expression
+    v = input_v.get()
+    r = math.tan(math.radians(float(v)))
+    input_text.set(str(r))
+    expression = str(r)
+
+def ctg(input_v):
+    global expression
+    v = input_v.get()
+    r = 1/math.tan(math.radians(float(v)))
+    input_text.set(str(r))
+    expression = str(r)
+
 
 def btn_click(item):
 
@@ -189,7 +215,6 @@ main_calc.title("Calc")
 function_min = StringVar()
 
 
-
 input_text = StringVar()
 input_frame = Frame(main_calc, width = 312, height = 50, bd = 0, highlightbackground = "black", highlightcolor = "black", highlightthickness = 1)
 input_frame.pack(side = TOP)
@@ -221,7 +246,7 @@ imgMod = PhotoImage(file="images/ButtonMod.png")
 imgClear = PhotoImage(file="images/ButtonClear.png")
 imgEqual = PhotoImage(file="images/ButtonEqual.png")
 imgFx = PhotoImage(file="images/ButtonFx.png")
-#imgTry = PhotoImage(file="images/ButtonTry.png")
+#imgTrigonometry = PhotoImage(file="images/ButtonTrigonometry.png")
 #imgSin = PhotoImage(file="images/ButtonSin.png")
 #imgCos = PhotoImage(file="images/ButtonCos.png")
 #imgTg = PhotoImage(file="images/ButtonTg.png")
@@ -252,9 +277,9 @@ button_modulo = Button(btns_frame, image = imgMod, width = 75, height = 51, bd =
 
 
 
-buttonTry = tk.Button(btns_frame, image = imgFx, width = 150, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2",
-              text="Create new window",
-              command=createTryWindow).grid(row = 5, column = 0, columnspan = 2, padx = 1, pady = 1)
+buttonTrigonometry = tk.Button(btns_frame, image = imgFx, width = 150, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2",
+              text="Create trigonometry window",
+              command=createTrigonometryWindow).grid(row = 5, column = 0, columnspan = 2, padx = 1, pady = 1)
 
 #buttonEmpty_Now = tk.Button(btns_frame, image = imgFx, width = 150, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2",
 #             text="...",
