@@ -6,85 +6,110 @@ import matplotlib
 from matplotlib.backends._backend_tk import NavigationToolbar2Tk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
+import scipy
+from scipy.optimize import fmin
 import  re
 
 def createNewWindow():
     functionWindow = tk.Toplevel(main_calc)
     input_func = StringVar()
+    input_constraint_min = StringVar()
+    input_constraint_max = StringVar()
+
+    func_min =''
+
     input_frame = Frame(functionWindow, width = 312, height = 50, bd = 0, highlightbackground = "black", highlightcolor = "black", highlightthickness = 1)
     input_frame.pack(side = TOP)
     function = ''
     input_field1 = Entry(input_frame, font = ('arial', 18, 'bold'), textvariable = input_func, width = 50, bg = "#eee", bd = 0, justify = RIGHT)
-
     input_field1.grid(row = 0, column = 0)
     input_field1.pack(ipady = 10)
+
+
+
 
     btns_frame2 = Frame(functionWindow, width=312, height=272.5, bg="grey")
     btns_frame2.pack()
 
+    input_frame2 = Frame(functionWindow, width = 312, height = 50, bd = 0, highlightbackground = "black", highlightcolor = "black", highlightthickness = 1)
+    input_frame2.pack(side = TOP)
+    function = ''
+    input_field2 = Entry(input_frame2, font = ('arial', 18, 'bold'), textvariable = input_constraint_min, width = 25, bg = "#eee", bd = 0, justify = RIGHT)
+    input_field2.grid(row = 0, column = 1)
+    input_field2.pack(ipady = 10)
+
+    input_frame3 = Frame(functionWindow, width = 312, height = 50, bd = 0, highlightbackground = "black", highlightcolor = "black", highlightthickness = 1)
+    input_frame3.pack(side = TOP)
+    function = ''
+    input_field3 = Entry(input_frame3, font = ('arial', 18, 'bold'), textvariable = input_constraint_max, width = 25, bg = "#eee", bd = 0, justify = RIGHT)
+    input_field3.grid(row = 0, column = 1)
+    input_field3.pack(ipady = 10)
+
+    btns_frame3 = Frame(functionWindow, width=312, height=272.5, bg="grey")
+    btns_frame3.pack()
+
+    input_frame4 = Frame(functionWindow, width = 312, height = 50, bd = 0, highlightbackground = "black", highlightcolor = "black", highlightthickness = 1)
+    input_frame4.pack(side = TOP)
+    function = ''
+    input_field4 = Entry(input_frame4, font = ('arial', 18, 'bold'), textvariable = function_min, width = 25, bg = "#eee", bd = 0, justify = RIGHT)
+    input_field4.grid(row = 0, column = 1)
+    input_field4.pack(ipady = 10)
+
     fig = matplotlib.figure.Figure(figsize=(5, 4), dpi=100)
     canvas = FigureCanvasTkAgg(fig, master=functionWindow)  # A tk.DrawingArea.
-    canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+    canvas.get_tk_widget().pack(side=tk.BOTTOM, fill=tk.BOTH, expand=1)
     toolbar = NavigationToolbar2Tk(canvas, functionWindow)
 
 
 
 
     button_drawfx = Button(btns_frame2, image = imgFx, width = 310, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda:[  btn_drawfx(input_func, canvas, toolbar, fig,  functionWindow, function)]).grid(row = 2, column = 0, columnspan = 4, padx = 1, pady = 1)
+    button_find_min = Button(btns_frame3, image = imgFx, width = 310, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda:[ find_min(input_func,input_constraint_min,input_constraint_max)]).grid(row = 2, column = 0, columnspan = 4, padx = 1, pady = 1)
 
 
 
 
-def createTrigonometryWindow():
+def createTryWindow():
     functionWindow = tk.Toplevel(main_calc)
     input_v = StringVar()
 
-    btns_frame_tri = Frame(functionWindow, width=312, height=272.5, bg="grey")
-    btns_frame_tri.pack()
+    btns_frame_try = Frame(functionWindow, width=312, height=272.5, bg="grey")
+    btns_frame_try.pack()
 
-    button_sin = Button(btns_frame_tri, image=img1, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+    button_sin = Button(btns_frame_try, image=img1, width=75, height=51, bd=0, bg="grey", activebackground="grey",
                         cursor="hand2", command=lambda: sin(input_text)).grid(row = 0, column = 0, columnspan = 1, padx = 1, pady = 1)
 
-    button_cos = Button(btns_frame_tri, image=img1, width=75, height=51, bd=0, bg="grey", activebackground="grey",
-                        cursor="hand2", command=lambda: cos(input_text)).grid(row = 0, column = 1, columnspan = 1, padx = 1, pady = 1)
+    button_cos = Button(btns_frame_try, image=img1, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+                        cursor="hand2", command=lambda: btn_click("cos()")).grid(row = 0, column = 1, columnspan = 1, padx = 1, pady = 1)
 
-    button_tg = Button(btns_frame_tri, image=img1, width=75, height=51, bd=0, bg="grey", activebackground="grey",
-                        cursor="hand2", command=lambda: tg(input_text)).grid(row=1, column=0, columnspan=1, padx=1,
+    button_tg = Button(btns_frame_try, image=img1, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+                        cursor="hand2", command=lambda: btn_click("tg()")).grid(row=1, column=0, columnspan=1, padx=1,
                                                                                  pady=1)
 
-    button_ctg = Button(btns_frame_tri, image=img1, width=75, height=51, bd=0, bg="grey", activebackground="grey",
-                        cursor="hand2", command=lambda: ctg(input_text)).grid(row=1, column=1, columnspan=1, padx=1,
+    button_ctg = Button(btns_frame_try, image=img1, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+                        cursor="hand2", command=lambda: btn_click("ctg()")).grid(row=1, column=1, columnspan=1, padx=1,
                                                                                  pady=1)
 
 
 def sin(input_v):
     global expression
     v = input_v.get()
+    print(v)
     r = math.sin(math.radians(float(v)))
+    print(r)
     input_text.set(str(r))
-    expression = str(r)
 
-def cos(input_v):
-    global expression
-    v = input_v.get()
-    r = math.cos(math.radians(float(v)))
-    input_text.set(str(r))
-    expression = str(r)
+def find_min(input_func,input_constraint_min,input_constraint_max):
+    global function_min
+    function = input_func.get()
+    print(function)
+    func = string2func(function)
+    print(input_constraint_min.get(), input_constraint_max.get())
+    xmin_local = scipy.optimize.fminbound(func, int(input_constraint_min.get()), int(input_constraint_max.get()))
+    print( xmin_local)
+    function_min.set(str(xmin_local))
 
-def tg(input_v):
-    global expression
-    v = input_v.get()
-    r = math.tan(math.radians(float(v)))
-    input_text.set(str(r))
-    expression = str(r)
-
-def ctg(input_v):
-    global expression
-    v = input_v.get()
-    r = 1/math.tan(math.radians(float(v)))
-    input_text.set(str(r))
-    expression = str(r)
-
+    print(function_min)
 
 def btn_click(item):
 
@@ -161,6 +186,7 @@ main_calc = Tk()
 main_calc.geometry("316x486")
 main_calc.resizable(0, 0)
 main_calc.title("Calc")
+function_min = StringVar()
 
 
 
@@ -195,7 +221,7 @@ imgMod = PhotoImage(file="images/ButtonMod.png")
 imgClear = PhotoImage(file="images/ButtonClear.png")
 imgEqual = PhotoImage(file="images/ButtonEqual.png")
 imgFx = PhotoImage(file="images/ButtonFx.png")
-#imgTrigonometry = PhotoImage(file="images/ButtonTrigonometry.png")
+#imgTry = PhotoImage(file="images/ButtonTry.png")
 #imgSin = PhotoImage(file="images/ButtonSin.png")
 #imgCos = PhotoImage(file="images/ButtonCos.png")
 #imgTg = PhotoImage(file="images/ButtonTg.png")
@@ -226,9 +252,9 @@ button_modulo = Button(btns_frame, image = imgMod, width = 75, height = 51, bd =
 
 
 
-buttonTrigonometry = tk.Button(btns_frame, image = imgFx, width = 150, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2",
-              text="Create trigonometry window",
-              command=createTrigonometryWindow).grid(row = 5, column = 0, columnspan = 2, padx = 1, pady = 1)
+buttonTry = tk.Button(btns_frame, image = imgFx, width = 150, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2",
+              text="Create new window",
+              command=createTryWindow).grid(row = 5, column = 0, columnspan = 2, padx = 1, pady = 1)
 
 #buttonEmpty_Now = tk.Button(btns_frame, image = imgFx, width = 150, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2",
 #             text="...",
