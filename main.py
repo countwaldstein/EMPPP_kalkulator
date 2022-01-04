@@ -82,17 +82,17 @@ def createTrigonometryWindow():
     btns_frame_tri = Frame(functionWindow, width=312, height=272.5, bg="grey")
     btns_frame_tri.pack()
 
-    button_sin = Button(btns_frame_tri, image=img1, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+    button_sin = Button(btns_frame_tri, image=imgSin, width=75, height=51, bd=0, bg="grey", activebackground="grey",
                         cursor="hand2", command=lambda: sin(input_text)).grid(row = 0, column = 0, columnspan = 1, padx = 1, pady = 1)
 
-    button_cos = Button(btns_frame_tri, image=img1, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+    button_cos = Button(btns_frame_tri, image=imgCos, width=75, height=51, bd=0, bg="grey", activebackground="grey",
                         cursor="hand2", command=lambda: cos(input_text)).grid(row = 0, column = 1, columnspan = 1, padx = 1, pady = 1)
 
-    button_tg = Button(btns_frame_tri, image=img1, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+    button_tg = Button(btns_frame_tri, image=imgTg, width=75, height=51, bd=0, bg="grey", activebackground="grey",
                         cursor="hand2", command=lambda: tg(input_text)).grid(row=1, column=0, columnspan=1, padx=1,
                                                                                  pady=1)
 
-    button_ctg = Button(btns_frame_tri, image=img1, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+    button_ctg = Button(btns_frame_tri, image=imgCtg, width=75, height=51, bd=0, bg="grey", activebackground="grey",
                         cursor="hand2", command=lambda: ctg(input_text)).grid(row=1, column=1, columnspan=1, padx=1,
                                                                                  pady=1)
 
@@ -246,11 +246,11 @@ imgMod = PhotoImage(file="images/ButtonMod.png")
 imgClear = PhotoImage(file="images/ButtonClear.png")
 imgEqual = PhotoImage(file="images/ButtonEqual.png")
 imgFx = PhotoImage(file="images/ButtonFx.png")
-#imgTrigonometry = PhotoImage(file="images/ButtonTrigonometry.png")
-#imgSin = PhotoImage(file="images/ButtonSin.png")
-#imgCos = PhotoImage(file="images/ButtonCos.png")
-#imgTg = PhotoImage(file="images/ButtonTg.png")
-#imgCtg = PhotoImage(file="images/ButtonCtg.png")
+imgTrigonometry = PhotoImage(file="images/ButtonTrigonometry.png")
+imgSin = PhotoImage(file="images/ButtonSin.png")
+imgCos = PhotoImage(file="images/ButtonCos.png")
+imgTg = PhotoImage(file="images/ButtonTg.png")
+imgCtg = PhotoImage(file="images/ButtonCtg.png")
 
 clear = Button(btns_frame, image = imgClear, width = 233, height = 53, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_clear()).grid(row = 0, column = 0, columnspan = 3, padx = 1, pady = 1)
 divide = Button(btns_frame, image = imgDivision, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click("/")).grid(row = 0, column = 3, padx = 1, pady = 1)
@@ -277,7 +277,7 @@ button_modulo = Button(btns_frame, image = imgMod, width = 75, height = 51, bd =
 
 
 
-buttonTrigonometry = tk.Button(btns_frame, image = imgFx, width = 150, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2",
+buttonTrigonometry = tk.Button(btns_frame, image = imgTrigonometry, width = 152, height = 53, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2",
               text="Create trigonometry window",
               command=createTrigonometryWindow).grid(row = 5, column = 0, columnspan = 2, padx = 1, pady = 1)
 
