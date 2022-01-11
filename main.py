@@ -108,6 +108,22 @@ def find_min(input_func,input_constraint_min,input_constraint_max):
 
     print(function_min)
 
+def log10(input_v):
+    global expression
+    v = input_v.get()
+    n = math.log10(float(v))
+    input_text.set(str(n))
+    expression = str(n)
+    return ''
+
+def ln(input_v):
+    global expression
+    v = input_v.get()
+    n = math.log(float(v))
+    input_text.set(str(n))
+    expression = str(n)
+    return ''
+
 def factorial(input_v):
     global expression
     v = input_v.get()
@@ -271,6 +287,8 @@ imgCtg = PhotoImage(file="images/ButtonCtg.png")
 #imgE = PhotoImage(file="images/ButtonE.png")
 #imgFactorial = PhotoImage(file="images/ButtonFactorial.png")
 #imgSquare = PhotoImage(file="images/ButtonSquare.png")
+#imgLog10 = PhotoImage(file="images/ButtonLog10.png")
+#imgLn = PhotoImage(file="images/ButtonLn.png")
 
 clear = Button(btns_frame, image = imgClear, width = 233, height = 53, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_clear()).grid(row = 0, column = 0, columnspan = 3, padx = 1, pady = 1)
 divide = Button(btns_frame, image = imgDivision, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click("/")).grid(row = 0, column = 3, padx = 1, pady = 1)
@@ -307,9 +325,9 @@ buttonTrigonometry = tk.Button(btns_frame, image = imgTrigonometry, width = 152,
               text="Create trigonometry window",
               command=createTrigonometryWindow).grid(row = 6, column = 0, columnspan = 2, padx = 1, pady = 1)
 
-#buttonEmpty_Now = tk.Button(btns_frame, image = imgFx, width = 150, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2",
-#             text="...",
-#              command=btn_click("1")).grid(row = 6, column = 2, columnspan = 2, padx = 1, pady = 1)
+button_log10 = Button(btns_frame, image = imgMod, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click(log10(input_text))).grid(row = 6, column = 2,  padx = 1, pady = 1)
+
+button_ln = Button(btns_frame, image = imgMod, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click(ln(input_text))).grid(row = 6, column = 3,  padx = 1, pady = 1)
 
 button_equals = Button(btns_frame, image = imgEqual, width = 310, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_equal()).grid(row = 7, column = 0, columnspan = 4, padx = 1, pady = 1)
 
