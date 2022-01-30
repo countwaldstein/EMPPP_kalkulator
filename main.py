@@ -25,55 +25,17 @@ def createNewWindow():
     input_field1.grid(row = 0, column = 0)
     input_field1.pack(ipady = 10)
 
-
-
-
     btns_frame2 = Frame(functionWindow, width=312, height=272.5, bg="grey")
     btns_frame2.pack()
-
-    input_frame2 = Frame(functionWindow, width = 312, height = 50, bd = 0, highlightbackground = "black", highlightcolor = "black", highlightthickness = 1)
-    input_frame2.pack(side = TOP)
-    function = ''
-    input_field2 = Entry(input_frame2, font = ('arial', 18, 'bold'), textvariable = input_constraint_min, width = 25, bg = "#eee", bd = 0, justify = RIGHT)
-    input_field2.grid(row = 0, column = 1)
-    input_field2.pack(ipady = 10)
-
-    input_frame3 = Frame(functionWindow, width = 312, height = 50, bd = 0, highlightbackground = "black", highlightcolor = "black", highlightthickness = 1)
-    input_frame3.pack(side = TOP)
-    function = ''
-    input_field3 = Entry(input_frame3, font = ('arial', 18, 'bold'), textvariable = input_constraint_max, width = 25, bg = "#eee", bd = 0, justify = RIGHT)
-    input_field3.grid(row = 0, column = 1)
-    input_field3.pack(ipady = 10)
-
-    btns_frame3 = Frame(functionWindow, width=312, height=272.5, bg="grey")
-    btns_frame3.pack()
-
-    input_frame4 = Frame(functionWindow, width = 312, height = 50, bd = 0, highlightbackground = "black", highlightcolor = "black", highlightthickness = 1)
-    input_frame4.pack(side = TOP)
-    function = ''
-    input_field4 = Entry(input_frame4, font = ('arial', 18, 'bold'), textvariable = function_min, width = 25, bg = "#eee", bd = 0, justify = RIGHT)
-    input_field4.grid(row = 0, column = 1)
-    input_field4.pack(ipady = 10)
 
     fig = matplotlib.figure.Figure(figsize=(5, 4), dpi=100)
     canvas = FigureCanvasTkAgg(fig, master=functionWindow)  # A tk.DrawingArea.
     canvas.get_tk_widget().pack(side=tk.BOTTOM, fill=tk.BOTH, expand=1)
     toolbar = NavigationToolbar2Tk(canvas, functionWindow)
 
-
-
-
-    button_drawfx = Button(btns_frame2, image = imgFx, width = 310, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda:[  btn_drawfx(input_func, canvas, toolbar, fig,  functionWindow, function)]).grid(row = 2, column = 0, columnspan = 4, padx = 1, pady = 1)
-    button_find_min = Button(btns_frame3, image = imgFx, width = 310, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda:[ find_min(input_func,input_constraint_min,input_constraint_max)]).grid(row = 2, column = 0, columnspan = 4, padx = 1, pady = 1)
-
-
-
-
-
     button_drawfx = Button(btns_frame2, image = imgFx, width = 310, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda:[  btn_drawfx(input_func, canvas, toolbar, fig,  functionWindow, function)]).grid(row = 2, column = 0, columnspan = 4, padx = 1, pady = 1)
 
-
-
+    button_drawfx = Button(btns_frame2, image = imgFx, width = 310, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda:[  btn_drawfx(input_func, canvas, toolbar, fig,  functionWindow, function)]).grid(row = 2, column = 0, columnspan = 4, padx = 1, pady = 1)
 
 def createTrigonometryWindow():
     functionWindow = tk.Toplevel(main_calc)
@@ -96,17 +58,50 @@ def createTrigonometryWindow():
                         cursor="hand2", command=lambda: ctg(input_text)).grid(row=1, column=1, columnspan=1, padx=1,
                                                                                  pady=1)
 
-def find_min(input_func,input_constraint_min,input_constraint_max):
-    global function_min
+# def find_min(input_func):
+#
+#     function = input_func
+#     split = ""
+#     if (";" in input_func):
+#         split = function.split(";")
+#     func = split[1]
+#     if ('min' in split[1]):
+#         xmin_local = scipy.optimize.fminbound(func, int(input_constraint_min.get()), int(input_constraint_max.get()))
+#     if ('max' in split[1]):
+#         xmin_local = scipy.optimize.fmaxbound(func, int(input_constraint_min.get()), int(input_constraint_max.get()))
+#     type_optimalisation = ""
+#     min_contr = ""
+#     max_contr = ""
+#
+#     global function_min
+#     function = input_func.get()
+#     print(function)
+#     func = string2func(function)
+#     # print(input_constraint_min.get(), input_constraint_max.get())
+#     # xmin_local = scipy.optimize.fminbound(func, int(input_constraint_min.get()), int(input_constraint_max.get()))
+#     print( xmin_local)
+#     function_min.set(str(xmin_local))
+#
+#     print(function_min)
+
+def btn_drawfx(input_func, canvas, toolbar, fig,  functionWindow, function):
+
+    print(input_func)
+
     function = input_func.get()
     print(function)
-    func = string2func(function)
-    print(input_constraint_min.get(), input_constraint_max.get())
-    xmin_local = scipy.optimize.fminbound(func, int(input_constraint_min.get()), int(input_constraint_max.get()))
-    print( xmin_local)
-    function_min.set(str(xmin_local))
-
-    print(function_min)
+    split = function.split(";")
+    function1 = split[0]
+    print(function1)
+    func = string2func(function1)
+    x = np.arange(-10, 10, .01)
+    fig.clear()
+    try:
+        fig.add_subplot(111).plot(x, func(x))
+    except:
+        print("ERROR")
+    canvas.draw_idle()
+    toolbar.update()
 
 def two_x(input_v):
     global expression
@@ -226,18 +221,6 @@ def btn_equal():
         result = ""
     expression = result
 
-def btn_drawfx(input_func, canvas, toolbar, fig,  functionWindow, function):
-
-    function = input_func.get()
-    print(function)
-    func = string2func(function)
-    x = np.arange(-10, 10, .01)
-    fig.clear()
-    fig.add_subplot(111).plot(x, func(x))
-    canvas.draw_idle()
-    toolbar.update()
-
-
 replacements = {
     'sin' : 'np.sin',
     'cos' : 'np.cos',
@@ -257,6 +240,7 @@ allowed_words = [
 def string2func(string):
     ''' evaluates the string and returns a function of x '''
     # find all words and check if all are allowed:
+
     for word in re.findall('[a-zA-Z_]+', string):
         if word not in allowed_words:
             raise ValueError(
