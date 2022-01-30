@@ -6,9 +6,10 @@ import matplotlib
 from matplotlib.backends._backend_tk import NavigationToolbar2Tk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
-import  re
+import re
 import scipy
 from scipy.optimize import fmin
+
 
 def createNewWindow():
     functionWindow = tk.Toplevel(main_calc)
@@ -16,14 +17,16 @@ def createNewWindow():
     input_constraint_min = StringVar()
     input_constraint_max = StringVar()
 
-    func_min =''
+    func_min = ''
 
-    input_frame = Frame(functionWindow, width = 312, height = 50, bd = 0, highlightbackground = "black", highlightcolor = "black", highlightthickness = 1)
-    input_frame.pack(side = TOP)
+    input_frame = Frame(functionWindow, width=312, height=50, bd=0, highlightbackground="black", highlightcolor="black",
+                        highlightthickness=1)
+    input_frame.pack(side=TOP)
     function = ''
-    input_field1 = Entry(input_frame, font = ('arial', 18, 'bold'), textvariable = input_func, width = 50, bg = "#eee", bd = 0, justify = RIGHT)
-    input_field1.grid(row = 0, column = 0)
-    input_field1.pack(ipady = 10)
+    input_field1 = Entry(input_frame, font=('arial', 18, 'bold'), textvariable=input_func, width=50, bg="#eee", bd=0,
+                         justify=RIGHT)
+    input_field1.grid(row=0, column=0)
+    input_field1.pack(ipady=10)
 
     btns_frame2 = Frame(functionWindow, width=312, height=272.5, bg="grey")
     btns_frame2.pack()
@@ -33,9 +36,16 @@ def createNewWindow():
     canvas.get_tk_widget().pack(side=tk.BOTTOM, fill=tk.BOTH, expand=1)
     toolbar = NavigationToolbar2Tk(canvas, functionWindow)
 
-    button_drawfx = Button(btns_frame2, image = imgFx, width = 310, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda:[  btn_drawfx(input_func, canvas, toolbar, fig,  functionWindow, function)]).grid(row = 2, column = 0, columnspan = 4, padx = 1, pady = 1)
+    button_drawfx = Button(btns_frame2, image=imgFx, width=310, height=51, bd=0, bg="grey", activebackground="grey",
+                           cursor="hand2", command=lambda: [
+            btn_drawfx(input_func, canvas, toolbar, fig, functionWindow, function)]).grid(row=2, column=0, columnspan=4,
+                                                                                          padx=1, pady=1)
 
-    button_drawfx = Button(btns_frame2, image = imgFx, width = 310, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda:[  btn_drawfx(input_func, canvas, toolbar, fig,  functionWindow, function)]).grid(row = 2, column = 0, columnspan = 4, padx = 1, pady = 1)
+    button_drawfx = Button(btns_frame2, image=imgFx, width=310, height=51, bd=0, bg="grey", activebackground="grey",
+                           cursor="hand2", command=lambda: [
+            btn_drawfx(input_func, canvas, toolbar, fig, functionWindow, function)]).grid(row=2, column=0, columnspan=4,
+                                                                                          padx=1, pady=1)
+
 
 def createTrigonometryWindow():
     functionWindow = tk.Toplevel(main_calc)
@@ -45,54 +55,68 @@ def createTrigonometryWindow():
     btns_frame_tri.pack()
 
     button_sin = Button(btns_frame_tri, image=imgSin, width=75, height=51, bd=0, bg="grey", activebackground="grey",
-                        cursor="hand2", command=lambda: sin(input_text)).grid(row = 0, column = 0, columnspan = 1, padx = 1, pady = 1)
+                        cursor="hand2", command=lambda: sin(input_text)).grid(row=0, column=0, columnspan=1, padx=1,
+                                                                              pady=1)
 
     button_cos = Button(btns_frame_tri, image=imgCos, width=75, height=51, bd=0, bg="grey", activebackground="grey",
-                        cursor="hand2", command=lambda: cos(input_text)).grid(row = 0, column = 1, columnspan = 1, padx = 1, pady = 1)
+                        cursor="hand2", command=lambda: cos(input_text)).grid(row=0, column=1, columnspan=1, padx=1,
+                                                                              pady=1)
 
     button_tg = Button(btns_frame_tri, image=imgTg, width=75, height=51, bd=0, bg="grey", activebackground="grey",
-                        cursor="hand2", command=lambda: tg(input_text)).grid(row=1, column=0, columnspan=1, padx=1,
-                                                                                 pady=1)
+                       cursor="hand2", command=lambda: tg(input_text)).grid(row=1, column=0, columnspan=1, padx=1,
+                                                                            pady=1)
 
     button_ctg = Button(btns_frame_tri, image=imgCtg, width=75, height=51, bd=0, bg="grey", activebackground="grey",
                         cursor="hand2", command=lambda: ctg(input_text)).grid(row=1, column=1, columnspan=1, padx=1,
-                                                                                 pady=1)
+                                                                              pady=1)
 
-# def find_min(input_func):
-#
-#     function = input_func
-#     split = ""
-#     if (";" in input_func):
-#         split = function.split(";")
-#     func = split[1]
-#     if ('min' in split[1]):
-#         xmin_local = scipy.optimize.fminbound(func, int(input_constraint_min.get()), int(input_constraint_max.get()))
-#     if ('max' in split[1]):
-#         xmin_local = scipy.optimize.fmaxbound(func, int(input_constraint_min.get()), int(input_constraint_max.get()))
-#     type_optimalisation = ""
-#     min_contr = ""
-#     max_contr = ""
-#
-#     global function_min
-#     function = input_func.get()
-#     print(function)
-#     func = string2func(function)
-#     # print(input_constraint_min.get(), input_constraint_max.get())
-#     # xmin_local = scipy.optimize.fminbound(func, int(input_constraint_min.get()), int(input_constraint_max.get()))
-#     print( xmin_local)
-#     function_min.set(str(xmin_local))
-#
-#     print(function_min)
 
-def btn_drawfx(input_func, canvas, toolbar, fig,  functionWindow, function):
+def getNumbers(str):
+    array = [int(d) for d in re.findall(r'-?\d+', str)]
+    return array
 
-    print(input_func)
 
+def find_min(input_func, x1):
+    function = input_func
+    rsplit = ""
+    split = ""
+
+    if (';' in str(input_func)):
+        split = function.split(";")
+    if ('=' in split[1]):
+        rsplit = function.split("=")
+    else:
+        rsplit = split[1]
+
+    numbers = getNumbers(split[1])
+    min = numbers[0]
+    max = numbers[1]
+
+    print(string2func(split[0]))
+    if ('min' in split[1]):
+        xmin_local = scipy.optimize.minimize(string2func(split[0]), x0=[(-10.1)], bounds=[(int(min), int(max))])
+        opt = int(xmin_local.fun[0])
+    if ('max' in split[1]):
+        xmin_local = (
+            scipy.optimize.minimize((string2func("-(" + split[0] + ")")), x0=[(0.1)], bounds=[(int(min), int(max))]))
+        opt = -1 * int(xmin_local.fun[0])
+
+    print('xmin', opt)
+    return (opt)
+    #    x^2;min(2,3)
+    # x^2;max(0,1)
+
+
+def btn_drawfx(input_func, canvas, toolbar, fig, functionWindow, function):
     function = input_func.get()
-    print(function)
+    if ("=" in function):
+        temp_split = function.split(" =")
+        function = temp_split[0]
+    function2 = str(function)
+
     split = function.split(";")
     function1 = split[0]
-    print(function1)
+
     func = string2func(function1)
     x = np.arange(-10, 10, .01)
     fig.clear()
@@ -102,6 +126,13 @@ def btn_drawfx(input_func, canvas, toolbar, fig,  functionWindow, function):
         print("ERROR")
     canvas.draw_idle()
     toolbar.update()
+    if ('min' in function):
+        xmin_local1 = find_min(function, x)
+    if ('max' in function):
+        xmin_local1 = find_min(function, x)
+
+    input_func.set(function2 + " = " + str(round(xmin_local1)))
+
 
 def two_x(input_v):
     global expression
@@ -120,6 +151,7 @@ def ten_x(input_v):
     expression = str(n)
     return ''
 
+
 def floor(input_v):
     global expression
     v = input_v.get()
@@ -127,6 +159,7 @@ def floor(input_v):
     input_text.set(str(n))
     expression = str(n)
     return ''
+
 
 def ceil(input_v):
     global expression
@@ -136,6 +169,7 @@ def ceil(input_v):
     expression = str(n)
     return ''
 
+
 def log10(input_v):
     global expression
     v = input_v.get()
@@ -143,6 +177,7 @@ def log10(input_v):
     input_text.set(str(n))
     expression = str(n)
     return ''
+
 
 def ln(input_v):
     global expression
@@ -152,6 +187,7 @@ def ln(input_v):
     expression = str(n)
     return ''
 
+
 def factorial(input_v):
     global expression
     v = input_v.get()
@@ -159,6 +195,7 @@ def factorial(input_v):
     input_text.set(str(n))
     expression = str(n)
     return ''
+
 
 def square(input_v):
     global expression
@@ -168,12 +205,14 @@ def square(input_v):
     expression = str(n)
     return ''
 
+
 def sin(input_v):
     global expression
     v = input_v.get()
     r = math.sin(math.radians(float(v)))
     input_text.set(str(r))
     expression = str(r)
+
 
 def cos(input_v):
     global expression
@@ -182,6 +221,7 @@ def cos(input_v):
     input_text.set(str(r))
     expression = str(r)
 
+
 def tg(input_v):
     global expression
     v = input_v.get()
@@ -189,29 +229,29 @@ def tg(input_v):
     input_text.set(str(r))
     expression = str(r)
 
+
 def ctg(input_v):
     global expression
     v = input_v.get()
-    r = 1/math.tan(math.radians(float(v)))
+    r = 1 / math.tan(math.radians(float(v)))
     input_text.set(str(r))
     expression = str(r)
 
 
 def btn_click(item):
-
     global expression
     expression = expression + str(item)
     input_text.set(expression)
 
-def btn_clear():
 
+def btn_clear():
     global expression
     expression = ""
     input_text.set("")
 
+
 def btn_equal():
     global expression
-
     try:
         result = str(eval(expression))
         input_text.set(result)
@@ -221,9 +261,10 @@ def btn_equal():
         result = ""
     expression = result
 
+
 replacements = {
-    'sin' : 'np.sin',
-    'cos' : 'np.cos',
+    'sin': 'np.sin',
+    'cos': 'np.cos',
     'exp': 'np.exp',
     'sqrt': 'np.sqrt',
     '^': '**',
@@ -236,6 +277,7 @@ allowed_words = [
     'sqrt',
     'exp',
 ]
+
 
 def string2func(string):
     ''' evaluates the string and returns a function of x '''
@@ -255,6 +297,7 @@ def string2func(string):
 
     return func
 
+
 expression = ""
 
 main_calc = Tk()
@@ -263,16 +306,17 @@ main_calc.resizable(0, 0)
 main_calc.title("Calc")
 function_min = StringVar()
 
-
 input_text = StringVar()
-input_frame = Frame(main_calc, width = 312, height = 50, bd = 0, highlightbackground = "black", highlightcolor = "black", highlightthickness = 1)
-input_frame.pack(side = TOP)
+input_frame = Frame(main_calc, width=312, height=50, bd=0, highlightbackground="black", highlightcolor="black",
+                    highlightthickness=1)
+input_frame.pack(side=TOP)
 
-input_field = Entry(input_frame, font = ('arial', 18, 'bold'), textvariable = input_text, width = 50, bg = "#eee", bd = 0, justify = RIGHT)
-input_field.grid(row = 0, column = 0)
-input_field.pack(ipady = 10)
+input_field = Entry(input_frame, font=('arial', 18, 'bold'), textvariable=input_text, width=50, bg="#eee", bd=0,
+                    justify=RIGHT)
+input_field.grid(row=0, column=0)
+input_field.pack(ipady=10)
 
-btns_frame = Frame(main_calc, width = 312, height = 323.5, bg = "grey")
+btns_frame = Frame(main_calc, width=312, height=323.5, bg="grey")
 btns_frame.pack()
 
 img0 = PhotoImage(file="images/Button0.png")
@@ -311,59 +355,91 @@ imgCeil = PhotoImage(file="images/Ceil.png")
 imgTwo_x = PhotoImage(file="images/Two_x.png")
 imgTen_x = PhotoImage(file="images/Ten_x.png")
 
-clear = Button(btns_frame, image = imgClear, width = 233, height = 53, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_clear()).grid(row = 0, column = 0, columnspan = 3, padx = 1, pady = 1)
-divide = Button(btns_frame, image = imgDivision, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click("/")).grid(row = 0, column = 3, padx = 1, pady = 1)
+clear = Button(btns_frame, image=imgClear, width=233, height=53, bd=0, bg="grey", activebackground="grey",
+               cursor="hand2", command=lambda: btn_clear()).grid(row=0, column=0, columnspan=3, padx=1, pady=1)
+divide = Button(btns_frame, image=imgDivision, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+                cursor="hand2", command=lambda: btn_click("/")).grid(row=0, column=3, padx=1, pady=1)
 
-button_one = Button(btns_frame, image = img1, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click("1")).grid(row = 1, column = 0,  padx = 1, pady = 1)
-button_two = Button(btns_frame, image = img2, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click("2")).grid(row = 1, column = 1,  padx = 1, pady = 1)
-button_three = Button(btns_frame, image = img3, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click("3")).grid(row = 1, column = 2, padx = 1, pady = 1)
-button_plus = Button(btns_frame, image = imgPlus, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click("+")).grid(row = 1, column = 3, padx = 1, pady = 1)
+button_one = Button(btns_frame, image=img1, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+                    cursor="hand2", command=lambda: btn_click("1")).grid(row=1, column=0, padx=1, pady=1)
+button_two = Button(btns_frame, image=img2, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+                    cursor="hand2", command=lambda: btn_click("2")).grid(row=1, column=1, padx=1, pady=1)
+button_three = Button(btns_frame, image=img3, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+                      cursor="hand2", command=lambda: btn_click("3")).grid(row=1, column=2, padx=1, pady=1)
+button_plus = Button(btns_frame, image=imgPlus, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+                     cursor="hand2", command=lambda: btn_click("+")).grid(row=1, column=3, padx=1, pady=1)
 
-button_four = Button(btns_frame, image = img4, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click("4")).grid(row = 2, column = 0,  padx = 1, pady = 1)
-button_five = Button(btns_frame, image = img5, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click("5")).grid(row = 2, column = 1, padx = 1, pady = 1)
-button_six = Button(btns_frame, image = img6, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click("6")).grid(row = 2, column = 2,  padx = 1, pady = 1)
-button_minus = Button(btns_frame, image = imgMinus, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click("-")).grid(row = 2, column = 3,  padx = 1, pady = 1)
+button_four = Button(btns_frame, image=img4, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+                     cursor="hand2", command=lambda: btn_click("4")).grid(row=2, column=0, padx=1, pady=1)
+button_five = Button(btns_frame, image=img5, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+                     cursor="hand2", command=lambda: btn_click("5")).grid(row=2, column=1, padx=1, pady=1)
+button_six = Button(btns_frame, image=img6, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+                    cursor="hand2", command=lambda: btn_click("6")).grid(row=2, column=2, padx=1, pady=1)
+button_minus = Button(btns_frame, image=imgMinus, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+                      cursor="hand2", command=lambda: btn_click("-")).grid(row=2, column=3, padx=1, pady=1)
 
-button_seven = Button(btns_frame, image = img7, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click("7")).grid(row = 3, column = 0,  padx = 1, pady = 1)
-button_eight = Button(btns_frame, image = img8, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click("8")).grid(row = 3, column = 1, padx = 1, pady = 1)
-button_nine = Button(btns_frame, image = img9, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click("9")).grid(row = 3, column = 2,  padx = 1, pady = 1)
-button_multiply = Button(btns_frame, image = imgMulti, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click("*")).grid(row = 3, column = 3,  padx = 1, pady = 1)
+button_seven = Button(btns_frame, image=img7, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+                      cursor="hand2", command=lambda: btn_click("7")).grid(row=3, column=0, padx=1, pady=1)
+button_eight = Button(btns_frame, image=img8, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+                      cursor="hand2", command=lambda: btn_click("8")).grid(row=3, column=1, padx=1, pady=1)
+button_nine = Button(btns_frame, image=img9, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+                     cursor="hand2", command=lambda: btn_click("9")).grid(row=3, column=2, padx=1, pady=1)
+button_multiply = Button(btns_frame, image=imgMulti, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+                         cursor="hand2", command=lambda: btn_click("*")).grid(row=3, column=3, padx=1, pady=1)
 
-button_zero = Button(btns_frame, image = img0, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click("0")).grid(row = 4, column = 0,  padx = 1, pady = 1)
-button_dot = Button(btns_frame, image = imgDot, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click(".")).grid(row = 4, column = 1,  padx = 1, pady = 1)
-button_exp = Button(btns_frame, image = imgExpo, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click("**")).grid(row = 4, column = 2,  padx = 1, pady = 1)
-button_modulo = Button(btns_frame, image = imgMod, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click("%")).grid(row = 4, column = 3,  padx = 1, pady = 1)
+button_zero = Button(btns_frame, image=img0, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+                     cursor="hand2", command=lambda: btn_click("0")).grid(row=4, column=0, padx=1, pady=1)
+button_dot = Button(btns_frame, image=imgDot, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+                    cursor="hand2", command=lambda: btn_click(".")).grid(row=4, column=1, padx=1, pady=1)
+button_exp = Button(btns_frame, image=imgExpo, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+                    cursor="hand2", command=lambda: btn_click("**")).grid(row=4, column=2, padx=1, pady=1)
+button_modulo = Button(btns_frame, image=imgMod, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+                       cursor="hand2", command=lambda: btn_click("%")).grid(row=4, column=3, padx=1, pady=1)
 
-button_pi = Button(btns_frame, image = imgPi, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click(math.pi)).grid(row = 5, column = 0,  padx = 1, pady = 1)
+button_pi = Button(btns_frame, image=imgPi, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+                   cursor="hand2", command=lambda: btn_click(math.pi)).grid(row=5, column=0, padx=1, pady=1)
 
-button_e = Button(btns_frame, image = imgE, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click(math.e)).grid(row = 5, column = 1,  padx = 1, pady = 1)
+button_e = Button(btns_frame, image=imgE, width=75, height=51, bd=0, bg="grey", activebackground="grey", cursor="hand2",
+                  command=lambda: btn_click(math.e)).grid(row=5, column=1, padx=1, pady=1)
 
-button_factorial = Button(btns_frame, image = imgFactorial, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click(factorial(input_text))).grid(row = 5, column = 2,  padx = 1, pady = 1)
+button_factorial = Button(btns_frame, image=imgFactorial, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+                          cursor="hand2", command=lambda: btn_click(factorial(input_text))).grid(row=5, column=2,
+                                                                                                 padx=1, pady=1)
 
-button_square = Button(btns_frame, image = imgSquare, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click(square(input_text))).grid(row = 5, column = 3,  padx = 1, pady = 1)
+button_square = Button(btns_frame, image=imgSquare, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+                       cursor="hand2", command=lambda: btn_click(square(input_text))).grid(row=5, column=3, padx=1,
+                                                                                           pady=1)
 
-button_two_x = Button(btns_frame, image = imgTwo_x, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click(two_x(input_text))).grid(row = 6, column = 0,  padx = 1, pady = 1)
-button_ten_x = Button(btns_frame, image = imgTen_x, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click(ten_x(input_text))).grid(row = 6, column = 1,  padx = 1, pady = 1)
-button_floor = Button(btns_frame, image = imgFloor, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click(floor(input_text))).grid(row = 6, column = 2,  padx = 1, pady = 1)
-button_ceil = Button(btns_frame, image = imgCeil, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click(ceil(input_text))).grid(row = 6, column = 3,  padx = 1, pady = 1)
+button_two_x = Button(btns_frame, image=imgTwo_x, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+                      cursor="hand2", command=lambda: btn_click(two_x(input_text))).grid(row=6, column=0, padx=1,
+                                                                                         pady=1)
+button_ten_x = Button(btns_frame, image=imgTen_x, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+                      cursor="hand2", command=lambda: btn_click(ten_x(input_text))).grid(row=6, column=1, padx=1,
+                                                                                         pady=1)
+button_floor = Button(btns_frame, image=imgFloor, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+                      cursor="hand2", command=lambda: btn_click(floor(input_text))).grid(row=6, column=2, padx=1,
+                                                                                         pady=1)
+button_ceil = Button(btns_frame, image=imgCeil, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+                     cursor="hand2", command=lambda: btn_click(ceil(input_text))).grid(row=6, column=3, padx=1, pady=1)
 
+buttonTrigonometry = tk.Button(btns_frame, image=imgTrigonometry, width=152, height=53, bd=0, bg="grey",
+                               activebackground="grey", cursor="hand2",
+                               text="Create trigonometry window",
+                               command=createTrigonometryWindow).grid(row=7, column=0, columnspan=2, padx=1, pady=1)
 
-buttonTrigonometry = tk.Button(btns_frame, image = imgTrigonometry, width = 152, height = 53, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2",
-              text="Create trigonometry window",
-              command=createTrigonometryWindow).grid(row = 7, column = 0, columnspan = 2, padx = 1, pady = 1)
+button_log10 = Button(btns_frame, image=imgLog10, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+                      cursor="hand2", command=lambda: btn_click(log10(input_text))).grid(row=7, column=2, padx=1,
+                                                                                         pady=1)
 
-button_log10 = Button(btns_frame, image = imgLog10, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click(log10(input_text))).grid(row = 7, column = 2,  padx = 1, pady = 1)
+button_ln = Button(btns_frame, image=imgLn, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+                   cursor="hand2", command=lambda: btn_click(ln(input_text))).grid(row=7, column=3, padx=1, pady=1)
 
-button_ln = Button(btns_frame, image = imgLn, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click(ln(input_text))).grid(row = 7, column = 3,  padx = 1, pady = 1)
+button_equals = Button(btns_frame, image=imgEqual, width=310, height=51, bd=0, bg="grey", activebackground="grey",
+                       cursor="hand2", command=lambda: btn_equal()).grid(row=8, column=0, columnspan=4, padx=1, pady=1)
 
-button_equals = Button(btns_frame, image = imgEqual, width = 310, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_equal()).grid(row = 8, column = 0, columnspan = 4, padx = 1, pady = 1)
-
-buttonExample = tk.Button(btns_frame, image = imgFx, width = 310, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2",
-              text="Create new window",
-              command=createNewWindow).grid(row = 9, column = 0, columnspan = 4, padx = 1, pady = 1)
-
-
-
-
+buttonExample = tk.Button(btns_frame, image=imgFx, width=310, height=51, bd=0, bg="grey", activebackground="grey",
+                          cursor="hand2",
+                          text="Create new window",
+                          command=createNewWindow).grid(row=9, column=0, columnspan=4, padx=1, pady=1)
 
 main_calc.mainloop()
