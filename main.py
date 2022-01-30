@@ -316,16 +316,16 @@ imgSin = PhotoImage(file="images/ButtonSin.png")
 imgCos = PhotoImage(file="images/ButtonCos.png")
 imgTg = PhotoImage(file="images/ButtonTg.png")
 imgCtg = PhotoImage(file="images/ButtonCtg.png")
-#imgPi = PhotoImage(file="images/ButtonPi.png")
-#imgE = PhotoImage(file="images/ButtonE.png")
-#imgFactorial = PhotoImage(file="images/ButtonFactorial.png")
-#imgSquare = PhotoImage(file="images/ButtonSquare.png")
-#imgLog10 = PhotoImage(file="images/ButtonLog10.png")
-#imgLn = PhotoImage(file="images/ButtonLn.png")
-#imgFloor = PhotoImage(file="images/Floor.png")
-#imgCeil = PhotoImage(file="images/Ceil.png")
-#imgTwo_x = PhotoImage(file="images/Two_x.png")
-#imgTen_x = PhotoImage(file="images/Ten_x.png")
+imgPi = PhotoImage(file="images/ButtonPi.png")
+imgE = PhotoImage(file="images/ButtonE.png")
+imgFactorial = PhotoImage(file="images/ButtonFactorial.png")
+imgSquare = PhotoImage(file="images/ButtonSquare.png")
+imgLog10 = PhotoImage(file="images/ButtonLog10.png")
+imgLn = PhotoImage(file="images/ButtonLn.png")
+imgFloor = PhotoImage(file="images/Floor.png")
+imgCeil = PhotoImage(file="images/Ceil.png")
+imgTwo_x = PhotoImage(file="images/Two_x.png")
+imgTen_x = PhotoImage(file="images/Ten_x.png")
 
 clear = Button(btns_frame, image = imgClear, width = 233, height = 53, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_clear()).grid(row = 0, column = 0, columnspan = 3, padx = 1, pady = 1)
 divide = Button(btns_frame, image = imgDivision, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click("/")).grid(row = 0, column = 3, padx = 1, pady = 1)
@@ -350,27 +350,27 @@ button_dot = Button(btns_frame, image = imgDot, width = 75, height = 51, bd = 0,
 button_exp = Button(btns_frame, image = imgExpo, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click("**")).grid(row = 4, column = 2,  padx = 1, pady = 1)
 button_modulo = Button(btns_frame, image = imgMod, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click("%")).grid(row = 4, column = 3,  padx = 1, pady = 1)
 
-button_pi = Button(btns_frame, image = imgMod, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click(math.pi)).grid(row = 5, column = 0,  padx = 1, pady = 1)
+button_pi = Button(btns_frame, image = imgPi, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click(math.pi)).grid(row = 5, column = 0,  padx = 1, pady = 1)
 
-button_e = Button(btns_frame, image = imgMod, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click(math.e)).grid(row = 5, column = 1,  padx = 1, pady = 1)
+button_e = Button(btns_frame, image = imgE, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click(math.e)).grid(row = 5, column = 1,  padx = 1, pady = 1)
 
-button_factorial = Button(btns_frame, image = imgMod, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click(factorial(input_text))).grid(row = 5, column = 2,  padx = 1, pady = 1)
+button_factorial = Button(btns_frame, image = imgFactorial, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click(factorial(input_text))).grid(row = 5, column = 2,  padx = 1, pady = 1)
 
-button_square = Button(btns_frame, image = imgMod, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click(square(input_text))).grid(row = 5, column = 3,  padx = 1, pady = 1)
+button_square = Button(btns_frame, image = imgSquare, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click(square(input_text))).grid(row = 5, column = 3,  padx = 1, pady = 1)
 
-button_two_x = Button(btns_frame, image = imgDot, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click(two_x(input_text))).grid(row = 6, column = 0,  padx = 1, pady = 1)
-button_ten_x = Button(btns_frame, image = imgDot, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click(ten_x(input_text))).grid(row = 6, column = 1,  padx = 1, pady = 1)
-button_floor = Button(btns_frame, image = imgDot, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click(floor(input_text))).grid(row = 6, column = 2,  padx = 1, pady = 1)
-button_ceil = Button(btns_frame, image = imgDot, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click(ceil(input_text))).grid(row = 6, column = 3,  padx = 1, pady = 1)
+button_two_x = Button(btns_frame, image = imgTwo_x, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click(two_x(input_text))).grid(row = 6, column = 0,  padx = 1, pady = 1)
+button_ten_x = Button(btns_frame, image = imgTen_x, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click(ten_x(input_text))).grid(row = 6, column = 1,  padx = 1, pady = 1)
+button_floor = Button(btns_frame, image = imgFloor, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click(floor(input_text))).grid(row = 6, column = 2,  padx = 1, pady = 1)
+button_ceil = Button(btns_frame, image = imgCeil, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click(ceil(input_text))).grid(row = 6, column = 3,  padx = 1, pady = 1)
 
 
 buttonTrigonometry = tk.Button(btns_frame, image = imgTrigonometry, width = 152, height = 53, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2",
               text="Create trigonometry window",
               command=createTrigonometryWindow).grid(row = 7, column = 0, columnspan = 2, padx = 1, pady = 1)
 
-button_log10 = Button(btns_frame, image = imgMod, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click(log10(input_text))).grid(row = 7, column = 2,  padx = 1, pady = 1)
+button_log10 = Button(btns_frame, image = imgLog10, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click(log10(input_text))).grid(row = 7, column = 2,  padx = 1, pady = 1)
 
-button_ln = Button(btns_frame, image = imgMod, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click(ln(input_text))).grid(row = 7, column = 3,  padx = 1, pady = 1)
+button_ln = Button(btns_frame, image = imgLn, width = 75, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_click(ln(input_text))).grid(row = 7, column = 3,  padx = 1, pady = 1)
 
 button_equals = Button(btns_frame, image = imgEqual, width = 310, height = 51, bd = 0, bg = "grey", activebackground = "grey", cursor = "hand2", command = lambda: btn_equal()).grid(row = 8, column = 0, columnspan = 4, padx = 1, pady = 1)
 
