@@ -197,7 +197,7 @@ def factorial(input_v):
     return ''
 
 
-def square(input_v):
+def square_root(input_v):
     global expression
     v = input_v.get()
     n = math.sqrt(float(v))
@@ -347,7 +347,7 @@ imgCtg = PhotoImage(file="images/ButtonCtg.png")
 imgPi = PhotoImage(file="images/ButtonPi.png")
 imgE = PhotoImage(file="images/ButtonE.png")
 imgFactorial = PhotoImage(file="images/ButtonFactorial.png")
-imgSquare = PhotoImage(file="images/ButtonSquare.png")
+imgSquare_root = PhotoImage(file="images/ButtonSquareRoot.png")
 imgLog10 = PhotoImage(file="images/ButtonLog10.png")
 imgLn = PhotoImage(file="images/ButtonLn.png")
 imgFloor = PhotoImage(file="images/Floor.png")
@@ -406,8 +406,8 @@ button_factorial = Button(btns_frame, image=imgFactorial, width=75, height=51, b
                           cursor="hand2", command=lambda: btn_click(factorial(input_text))).grid(row=5, column=2,
                                                                                                  padx=1, pady=1)
 
-button_square = Button(btns_frame, image=imgSquare, width=75, height=51, bd=0, bg="grey", activebackground="grey",
-                       cursor="hand2", command=lambda: btn_click(square(input_text))).grid(row=5, column=3, padx=1,
+button_square_root = Button(btns_frame, image=imgSquare_root, width=75, height=51, bd=0, bg="grey", activebackground="grey",
+                       cursor="hand2", command=lambda: btn_click(square_root(input_text))).grid(row=5, column=3, padx=1,
                                                                                            pady=1)
 
 button_two_x = Button(btns_frame, image=imgTwo_x, width=75, height=51, bd=0, bg="grey", activebackground="grey",
