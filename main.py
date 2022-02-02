@@ -95,11 +95,11 @@ def find_min(input_func, x1):
     print(string2func(split[0]))
     if ('min' in split[1]):
         xmin_local = scipy.optimize.minimize(string2func(split[0]), x0=[(-10.1)], bounds=[(int(min), int(max))])
-        opt = int(xmin_local.fun[0])
+        opt = float(xmin_local.fun[0])
     if ('max' in split[1]):
         xmin_local = (
             scipy.optimize.minimize((string2func("-(" + split[0] + ")")), x0=[(0.1)], bounds=[(int(min), int(max))]))
-        opt = -1 * int(xmin_local.fun[0])
+        opt = -1 * float(xmin_local.fun[0])
 
     print('xmin', opt)
     return (opt)
@@ -117,7 +117,10 @@ def btn_drawfx(input_func, canvas, toolbar, fig, functionWindow, function):
     split = function.split(";")
     function1 = split[0]
 
-    func = string2func(function1)
+    try:
+        func = string2func(function1)
+    except:
+        print("Error")
     x = np.arange(-10, 10, .01)
     fig.clear()
     try:
@@ -131,8 +134,10 @@ def btn_drawfx(input_func, canvas, toolbar, fig, functionWindow, function):
     if ('max' in function):
         xmin_local1 = find_min(function, x)
 
-    input_func.set(function2 + " = " + str(round(xmin_local1)))
-
+    try:
+        input_func.set(function2 + " = " + str(round(xmin_local1,3)))
+    except:
+        print("error")
 
 def two_x(input_v):
     global expression
